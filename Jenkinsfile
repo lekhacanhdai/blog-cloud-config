@@ -1,6 +1,3 @@
-def unixTime = ''
-def developmentTag = ''
-
 pipeline {
     agent any
     environment {
@@ -21,19 +18,14 @@ pipeline {
         }
         stage("Docker build") {
             steps {
-                script {
-                    unixTime = (new Date().time / 1000) as Integer
-                    developmentTag = "${unixTime}"
-                }
-                sh 'echo ${developmentTag}'
-                sh 'docker build -t anhdai0801/blog-cloud-config:${developmentTag} .'
+                sh 'docker build -t anhdai0801/blog-cloud-config .'
             }
         }
         stage("Docker push") {
             steps {
                 sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
-                sh "docker push anhdai0801/blog-cloud-config:${developmentTag}"
-                sh "docker rmi anhdai0801/blog-cloud-config:${developmentTag}"
+                sh "docker push anhdai0801/blog-cloud-config"
+                sh "docker rmi anhdai0801/blog-cloud-config"
             }
         }
     }
