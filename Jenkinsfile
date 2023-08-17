@@ -25,6 +25,7 @@ pipeline {
                     unixTime = (new Date().time / 1000) as Integer
                     developmentTag = "${unixTime}"
                 }
+                sh 'echo ${developmentTag}'
                 sh 'docker build -t anhdai0801/blog-cloud-config:${developmentTag} .'
             }
         }
