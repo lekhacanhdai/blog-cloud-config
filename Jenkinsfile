@@ -1,3 +1,6 @@
+def unixTime = ''
+def developmentTag = ''
+
 pipeline {
     agent any
     environment {
