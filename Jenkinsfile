@@ -18,14 +18,14 @@ pipeline {
         }
         stage("Docker build") {
             steps {
-                sh 'docker build -t anhdai0801/blog-cloud-config .'
+                sh 'docker build -t anhdai0801/blog-cloud-config:latest .'
             }
         }
         stage("Docker push") {
             steps {
                 sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
-                sh "docker push anhdai0801/blog-cloud-config"
-                sh "docker rmi anhdai0801/blog-cloud-config"
+                sh "docker push anhdai0801/blog-cloud-config:latest"
+                sh "docker rmi anhdai0801/blog-cloud-config:latest"
             }
         }
     }
