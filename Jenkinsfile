@@ -5,15 +5,8 @@ pipeline {
     }
     stages {
         stage('Maven build') {
-            agent {
-                docker {
-                    image 'maven:3.6.3-jdk-11'
-                    args '-v /root/.m2:/root/.m2'
-                    reuseNode true
-                }
-            }
             steps {
-                 sh 'mvn -B -DskipTests clean package'
+                 sh 'mvn -s /home/jenkins/.m2/settings.xml -U clean install -Dmaven.test.skip=true'
             }
         }
         stage("Docker build") {
