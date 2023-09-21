@@ -1,15 +1,15 @@
 pipeline {
+    agent {
+        docker {
+            image 'maven:3.8.6-openjdk-11'
+            args '-v /root/.m2:/root/.m2'
+        }
+    }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub_user')
     }
     stages {
         stage('Maven build') {
-            agent {
-                docker {
-                    image 'maven:3.8.6-openjdk-11'
-                    args '-v /root/.m2:/root/.m2'
-                }
-            }
             steps {
                  sh 'mvn -U clean install -Dmaven.test.skip=true'
             }
