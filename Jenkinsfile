@@ -8,8 +8,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.8.6-openjdk-11'
-                    args '-v /home/jenkins/.m2:/home/jenkins/.m2 --network=host'
-                    reuseNode true
+                    args '-v /home/jenkins/.m2:/home/jenkins/.m2'
                 }
             }
             steps {
