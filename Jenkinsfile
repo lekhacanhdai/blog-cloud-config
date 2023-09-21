@@ -8,11 +8,10 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.8.6-openjdk-11'
-                    args '-v /home/jenkins/.m2:/home/jenkins/.m2'
+                    args '-v /root/.m2:/root/.m2'
                 }
             }
             steps {
-                 sh 'cat /home/jenkins/.m2/settings.xml'
                  sh 'mvn -s /home/jenkins/.m2/settings.xml -U clean install -Dmaven.test.skip=true'
             }
         }
