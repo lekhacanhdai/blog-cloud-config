@@ -8,12 +8,12 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.6.3-jdk-11'
-                    args '-v /home/jenkins/.m2:/home/jenkins/.m2 --network=host'
+                    args '-v /var/jenkins_home:/var/jenkins_home --network=host'
                     reuseNode true
                 }
             }
             steps {
-                 sh 'mvn -s /home/jenkins/.m2/settings.xml -U clean install -Dmaven.test.skip=true'
+                 sh 'mvn -s /var/jenkins_home/settings.xml -U clean install -Dmaven.test.skip=true'
             }
         }
         stage("Docker build") {
